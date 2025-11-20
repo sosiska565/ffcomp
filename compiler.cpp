@@ -38,7 +38,6 @@ std::string trim(const std::string& str) {
 	return str.substr(start, end - start + 1);
 }
 
-// Находит соответствующую закрывающую скобку с учётом вложенности
 size_t findMatchingBracket(const std::string& str, size_t openPos) {
 	int level = 0;
 	bool inString = false;
@@ -402,7 +401,6 @@ std::string whileRound(int line, int symbol, std::vector<std::string> *lines) {
 	return result;
 }
 
-// Склеивание многострочных конструкций
 std::string joinMultilineBlocks(const std::vector<std::string>& lines) {
 	std::string result;
 	int bracketLevel = 0;
@@ -427,14 +425,12 @@ std::string joinMultilineBlocks(const std::vector<std::string>& lines) {
 			}
 		}
 		
-		// Если скобки закрыты, завершаем блок
 		if(bracketLevel == 0) {
 			result += currentBlock;
 			currentBlock.clear();
 		}
 	}
 	
-	// Добавляем остатки
 	if(!currentBlock.empty()) {
 		result += currentBlock;
 	}
@@ -471,11 +467,9 @@ int main(int argc, char *argv[]) {
 		lines.push_back(line);
 	}
 	
-	// Склеиваем многострочные блоки
 	std::string joinedCode = joinMultilineBlocks(lines);
 	debugLog("Joined code: " + joinedCode);
 	
-	// Разбиваем объединённый код на команды
 	std::vector<std::string> commands = splitCommands(joinedCode);
 	
 	std::cout << "Processing file..." << std::endl;
